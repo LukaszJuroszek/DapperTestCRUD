@@ -15,6 +15,6 @@ namespace DapperTestCRUD
         public int ID_Ddostawcy{ get; set; }
         public int Ilosc { get; set; }
         public decimal Cena{ get; set; }
-        public SqlDateTime  MyProperty { get; set; }
+        public SqlDateTime  DataDostawy { get; set; }
     }
 }

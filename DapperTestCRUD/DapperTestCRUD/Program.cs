@@ -13,13 +13,11 @@ namespace DapperTestCRUD
             using (var dBConnection = GetDBConnection())
             {
                 dBConnection.Open();
-                var query = "Select top 10 * from "+nameof(Produkt);
-                var resultQuery = dBConnection.Query<Produkt>(query);
+                var query = "Select top 10 * from "+nameof(Dostawa);
+                var resultQuery = dBConnection.Query<Dostawa>(query);
                 foreach (var item in resultQuery)
                 {
-                    if (( item.Jednostka_Produktu != "sztuki" ))
-                        Console.WriteLine(item);
-                    Console.WriteLine(item);
+                        Console.WriteLine(item.DataDostawy);
                 }
             }
         }

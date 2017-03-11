@@ -793,7 +793,7 @@ INSERT INTO Wlasnosc VALUES
 (19,34,'2012-09-18 09:40:11','2015-05-13 12:40:11'),
 (20,35,'2017-08-16 16:40:55',null);
 go
-INSERT INTO [Wizyta Szczegol] VALUES (1, 5,2,5, NULL),
+INSERT INTO WizytaSzczegol VALUES (1, 5,2,5, NULL),
 (1, 5,2,15, NULL),
 (2, 6,1,13, NULL),
 (3, 4,3,9, 'Z³y stan zdrowia zwierzêcia'),

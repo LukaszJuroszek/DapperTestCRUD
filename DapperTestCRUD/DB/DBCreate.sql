@@ -4,22 +4,22 @@ Use Weterynarz
 GO
 Create table Gatunek
 (
-ID_Gatunek int not null primary key identity(1,1),
+IdGatunek int not null primary key Identity(1,1),
 Nazwa varchar(50) not null unique
 )
 Go
 Create table Rasa
 (
-ID_Rasa int not null primary key identity(1,1),
-ID_Gatunek int not null foreign key references Gatunek(ID_Gatunek),
+IdRasa int not null primary key identity(1,1),
+IdGatunek int not null foreign key references Gatunek(IdGatunek),
 Nazwa varchar(50) not null unique
 )
 Go
 Create table Hodowla
 (
-ID_Hodowla  int not null primary key identity(1,1),
+IdHodowla  int not null primary key identity(1,1),
 Hodowca varchar(50),
-[Nazwa Hodowli] varchar(50) unique,
+NazwaHodowli varchar(50) unique,
 Miejscowosc varchar(50) not null,
 Ulica varchar(50),
 Telefon varchar(9) not null unique
@@ -28,13 +28,13 @@ constraint hodowla_telefon_consraint check (Telefon Like REPLICATE('[0-9]',9))
 Go
 Create table Usluga
 (
-ID_Usluga int not null primary key identity(1,1),
+IdUsluga int not null primary key identity(1,1),
 Nazwa varchar(100) not null unique
 )
 Go
 Create table Wlasciciel
 (
-ID_Wlasciciel int not null primary key identity(1,1),
+IdWlasciciel int not null primary key identity(1,1),
 Imie varchar(50) not null,
 Nazwisko varchar(50) not null,
 Miejscowosc  varchar(50) not null,
@@ -46,7 +46,7 @@ constraint Wlasciciel_pesel_consraint check (Pesel Like REPLICATE('[0-9]',11))
 Go
 Create table Lekarz
 (
-ID_Lekarz int not null primary key identity(1,1),
+IdLekarz int not null primary key identity(1,1),
 Imie varchar(50) not null,
 Nazwisko varchar(50) not null,
 Tytul varchar (20) not null default 'lek. wet. ',
@@ -55,49 +55,48 @@ Miejscowosc  varchar(50) not null,
 Ulica varchar(50),
 Pesel varchar(11)not null,
 Telefon varchar(9) not null unique,
-[Data Zatrudnienia] date not null,
+DataZatrudnienia date not null,
 constraint Lekarz_telefon_consraint check (Telefon Like REPLICATE('[0-9]',9)),
 constraint Lekarz_pesel_consraint check (Pesel Like REPLICATE('[0-9]',11))
 )
 Go
 Create table Zwierze
 (
-ID_Zwierze int not null primary key identity(1,1),
+IdZwierze int not null primary key identity(1,1),
 Imie varchar(50) not null,
 Plec varchar(10) not null,
-ID_Rasa int not null foreign key references Rasa(ID_Rasa),
-ID_Hodowla int foreign key references Hodowla(ID_Hodowla),
-[Data Urodzenia] date not null,
+IdRasa int not null foreign key references Rasa(IdRasa),
+IdHodowla int foreign key references Hodowla(IdHodowla),
+DataUrodzenia date not null,
 Rodowod varchar(50),
-[Numer Chipa] varchar(20),
-Mama int foreign key references Zwierze(ID_Zwierze),
-Tata int foreign key references Zwierze(ID_Zwierze),
+NumerChipa varchar(20),
+Mama int foreign key references Zwierze(IdZwierze),
+Tata int foreign key references Zwierze(IdZwierze),
 Waga DECIMAL(18, 5) not null
 constraint Waga_Cannot_Be_Lower_Than check (Waga > 0.001) 
 )
 Go
 Create table Wlasnosc
 (
-ID_Wlasnosc int not null primary key identity(1,1),
-ID_Wlasciciel int not null foreign key references Wlasciciel(ID_Wlasciciel),
-ID_Zwierze int not null foreign key references Zwierze(ID_Zwierze),
-[Data Od] date not null default GetDate(),
-[Data Do] date,
-constraint chk_Data_Do check ([Data Do] >= [Data OD]) 
+IdWlasnosc int not null primary key identity(1,1),
+IdWlasciciel int not null foreign key references Wlasciciel(IdWlasciciel),
+IdZwierze int not null foreign key references Zwierze(IdZwierze),
+DataOd date not null default GetDate(),
+DataDo date,
+constraint chk_Data_Do check (DataDo >= DataOd) 
 )
 Go
 Create table Wizyta
 (
-ID_Wizyta int not null primary key identity(1,1),
-ID_Zwierze int not null foreign key references Zwierze(ID_Zwierze),
-ID_Lekarz int not null foreign key references Lekarz(ID_Lekarz),
-
+IdWizyta int not null primary key identity(1,1),
+IdZwierze int not null foreign key references Zwierze(IdZwierze),
+IdLekarz int not null foreign key references Lekarz(IdLekarz),
 Data datetime not null default GetDate()
 )
 Go
 Create table Dostawca
 (
-ID_Dostawca int not null primary key identity(1,1),
+IdDostawca int not null primary key identity(1,1),
 Imie varchar(50) not null,
 Nazwisko varchar(50) not null,
 Miejscowosc varchar(50) not null,
@@ -107,37 +106,37 @@ Telefon int not null unique
 Go
 Create table Produkt 
 (
-ID_Produkt int not null primary key identity(1,1),
+IdProdukt int not null primary key identity(1,1),
 Nazwa varchar(100) not null,
 Jednostka_Produktu varchar(50),
 )
 Go
 Create table Magazyn
 (
-ID_Magazyn  int not null primary key identity(1,1),
+IdMagazyn  int not null primary key identity(1,1),
 Nazwa varchar(50) not null unique
 )
 Go
 Create table Dostawa
 (
-ID_Dostawa int not null primary key identity(1,1),
-ID_Produkt int not null foreign key references Produkt(ID_Produkt),
-ID_Magazyn int not null foreign key references Magazyn(ID_Magazyn),
+IdDostawa int not null primary key identity(1,1),
+IdProdukt int not null foreign key references Produkt(IdProdukt),
+IdMagazyn int not null foreign key references Magazyn(IdMagazyn),
 Ilosc decimal not null,
 Cena decimal not null,
-ID_Dostawca int not null foreign key references Dostawca(ID_Dostawca),
-[Data Dostawy] smalldatetime not null default GetDate(),
-constraint Data_Dostawy_nie_wczesniejsza_niz_teraz check ([Data Dostawy] <=GetDate()),
+IdDostawca int not null foreign key references Dostawca(IdDostawca),
+DataDostawy smalldatetime not null default GetDate(),
+constraint Data_Dostawy_nie_wczesniejsza_niz_teraz check (DataDostawy <=GetDate()),
 constraint ilosc_mniejsze_od_zera_Dostawa check (Ilosc >= 0.0)
 )
 Go
-Create table [Wizyta Szczegol]
+Create table WizytaSzczegol
 (
-ID_Wizyta_Szczegol int not null primary key identity(1,1),
-ID_Wizyta int not null foreign key references Wizyta(ID_Wizyta),
-ID_Dostawa int not null foreign key references Dostawa(ID_Dostawa),
+IdWizytaSzczegol int not null primary key identity(1,1),
+IdWizyta int not null foreign key references Wizyta(IdWizyta),
+IdDostawa int not null foreign key references Dostawa(IdDostawa),
 Ilosc decimal not null,
-ID_Usluga int not null foreign key references Usluga(ID_Usluga),
+IdUsluga int not null foreign key references Usluga(IdUsluga),
 Uwaga varchar(200) default 'Brak uwag',
 constraint ilosc_mniejsze_od_zera_Szczegol check (Ilosc >= 0.0)
 )
