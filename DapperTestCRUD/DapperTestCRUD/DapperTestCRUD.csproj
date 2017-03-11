@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\IRepository.cs" />
     <Compile Include="POCO\Dostawa.cs" />
     <Compile Include="POCO\Dostawca.cs" />
     <Compile Include="POCO\Produkt.cs" />

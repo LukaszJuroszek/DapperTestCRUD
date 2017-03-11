@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using DapperTestCRUD.POCO;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -13,11 +14,11 @@ namespace DapperTestCRUD
             using (var dBConnection = GetDBConnection())
             {
                 dBConnection.Open();
-                var query = "Select top 10 * from "+nameof(Dostawa);
-                var resultQuery = dBConnection.Query<Dostawa>(query);
+                var query = "Select top 10 * from "+nameof(Dostawca);
+                var resultQuery = dBConnection.Query<Dostawca>(query);
                 foreach (var item in resultQuery)
                 {
-                        Console.WriteLine(item.DataDostawy);
+                        Console.WriteLine(item);
                 }
             }
         }

@@ -10,7 +10,7 @@ namespace DapperTestCRUD
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append($"{IdProdukt}, {Nazwa}, {JednostkaProduktu}");
+            sb.Append($"{IdProdukt},{Nazwa},{JednostkaProduktu}");
             return sb.ToString();
         }
     }
