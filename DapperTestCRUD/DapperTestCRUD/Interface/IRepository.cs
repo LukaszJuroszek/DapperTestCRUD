@@ -4,7 +4,7 @@ namespace DapperTestCRUD.Interface
 {
     interface IRepository<T>
     {
-        ICollection<T> GetRecords(int amount,bool DescOrAsc);
+        IEnumerable<T> GetRecords(int amount,bool descOrAsc);
         T GetSingleRecord(int recordId);
         bool InsertRecord(T record);
         bool DeleteRecord(int recordId);
