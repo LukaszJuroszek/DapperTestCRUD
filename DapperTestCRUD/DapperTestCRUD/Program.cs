@@ -13,7 +13,7 @@ namespace DapperTestCRUD
     {
         static void Main(string[] args)
         {
-            using (var dBConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["msSQLDataBase"].ConnectionString))
+            using (var dBConnection = GetDBConnection())
             {
                 dBConnection.Open();
                 var query = "Select * from Produkt";
@@ -25,6 +25,10 @@ namespace DapperTestCRUD
                     Console.WriteLine(item);
                 }
             }
+        }
+        private static SqlConnection GetDBConnection()
+        {
+            return new SqlConnection(ConfigurationManager.ConnectionStrings["msSQLDataBase"].ConnectionString);
         }
     }
 }
