@@ -1,11 +1,7 @@
 ﻿using Dapper;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DapperTestCRUD
 {
@@ -13,10 +9,11 @@ namespace DapperTestCRUD
     {
         static void Main(string[] args)
         {
+            //sample query, gets 10 records from Produkt
             using (var dBConnection = GetDBConnection())
             {
                 dBConnection.Open();
-                var query = "Select * from Produkt";
+                var query = "Select top 10 * from "+nameof(Produkt);
                 var resultQuery = dBConnection.Query<Produkt>(query);
                 foreach (var item in resultQuery)
                 {

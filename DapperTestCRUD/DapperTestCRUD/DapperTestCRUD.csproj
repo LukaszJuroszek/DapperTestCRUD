@@ -61,7 +61,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Produkt.cs" />
+    <Compile Include="POCO\Dostawa.cs" />
+    <Compile Include="POCO\Dostawca.cs" />
+    <Compile Include="POCO\Produkt.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
