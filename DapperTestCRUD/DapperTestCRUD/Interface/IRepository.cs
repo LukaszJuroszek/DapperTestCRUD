@@ -9,5 +9,6 @@ namespace DapperTestCRUD.Interface
         bool InsertRecord(T record);
         bool DeleteRecord(int recordId);
         bool UpdateRecord(T record);
+        
     }
 }
