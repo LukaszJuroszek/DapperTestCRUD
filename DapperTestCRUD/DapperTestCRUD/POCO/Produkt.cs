@@ -1,17 +1,46 @@
-﻿using System.Text;
+﻿using DapperTestCRUD.Interface;
+using System.Text;
+using System;
+using System.Collections.Generic;
 
 namespace DapperTestCRUD
 {
-    public class Produkt
+    public class Produkt : IRepository<Produkt>
     {
         public int IdProdukt { get; set; }
         public string Nazwa { get; set; }
         public string JednostkaProduktu { get; set; }
+
+        public bool DeleteRecord(int recordId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<Produkt> GetRecords(int amount,bool DescOrAsc)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Produkt GetSingleRecord(int recordId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool InsertRecord(Produkt record)
+        {
+            throw new NotImplementedException();
+        }
+
         public override string ToString()
         {
             var sb = new StringBuilder();
             sb.Append($"{IdProdukt},{Nazwa},{JednostkaProduktu}");
             return sb.ToString();
+        }
+
+        public bool UpdateRecord(Produkt record)
+        {
+            throw new NotImplementedException();
         }
     }
 }
