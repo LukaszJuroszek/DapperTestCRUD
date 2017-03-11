@@ -108,7 +108,7 @@ Create table Produkt
 (
 IdProdukt int not null primary key identity(1,1),
 Nazwa varchar(100) not null,
-Jednostka_Produktu varchar(50),
+JednostkaProduktu varchar(50),
 )
 Go
 Create table Magazyn

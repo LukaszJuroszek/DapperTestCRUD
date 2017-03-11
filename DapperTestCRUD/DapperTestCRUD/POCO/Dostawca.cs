@@ -2,7 +2,7 @@
 {
     public class Dostawca
     {
-        public int ID_Dostawca { get; set; }
+        public int IdDostawca { get; set; }
         public string Imie{ get; set; }
         public string Nazwisko{ get; set; }
         public string Miejscowosc{ get; set; }
