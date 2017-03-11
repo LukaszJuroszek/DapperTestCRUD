@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Dapper;
 using System.Linq;
+using System.Data.Common;
 
 namespace DapperTestCRUD
 {
@@ -45,7 +46,7 @@ namespace DapperTestCRUD
             {
                 db.Open();
                 var query = $"SELECT * FROM Produkt WHERE IdProdukt={recordId}";
-                return db.Query<Produkt>(query).SingleOrDefault();
+                return db.QuerySingleOrDefault<Produkt>(query);
             }
         }
         public bool InsertRecord(Produkt record)
@@ -56,13 +57,13 @@ namespace DapperTestCRUD
                 return RowsAffected(rowsAffected);
             }
         }
-        private bool RowsAffected(int rowsAffected)
-        {
-            return rowsAffected > 0 ? true : false;
-        }
         public bool UpdateRecord(Produkt record)
         {
             throw new NotImplementedException();
+        }
+        private bool RowsAffected(int rowsAffected)
+        {
+            return rowsAffected > 0 ? true : false;
         }
     }
 }
