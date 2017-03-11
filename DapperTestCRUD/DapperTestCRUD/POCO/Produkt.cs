@@ -20,7 +20,12 @@ namespace DapperTestCRUD
         }
         public bool DeleteRecord(int recordId)
         {
-            throw new NotImplementedException();
+            using (var db = DBConnection())
+            {
+                db.Open();
+                var rowsAffected = db.Execute(@"DELETE FROM Produkt WHERE IdProdukt = @IdProdukt ",new { IdProdukt = recordId });
+                return RowsAffected(rowsAffected);
+            }
         }
         public IEnumerable<Produkt> GetRecords(int amount,bool descOrAsc)
         {
@@ -45,12 +50,19 @@ namespace DapperTestCRUD
         }
         public bool InsertRecord(Produkt record)
         {
-            throw new NotImplementedException();
+            using (var db = DBConnection())
+            {
+                var rowsAffected = db.Execute("INSERT Produkt values (@Nazwa, @JednostkaProduktu)",new { Nazwa = record.Nazwa,JednostkaProduktu = record.JednostkaProduktu });
+                return RowsAffected(rowsAffected);
+            }
+        }
+        private bool RowsAffected(int rowsAffected)
+        {
+            return rowsAffected > 0 ? true : false;
         }
         public bool UpdateRecord(Produkt record)
         {
             throw new NotImplementedException();
         }
-
     }
 }
