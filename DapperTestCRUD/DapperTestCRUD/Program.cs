@@ -1,6 +1,4 @@
-﻿using Dapper;
-using DapperTestCRUD.POCO;
-using System;
+﻿using System;
 
 namespace DapperTestCRUD
 {
@@ -9,11 +7,11 @@ namespace DapperTestCRUD
         static void Main(string[] args)
         {
             var produkts = new Produkt();
-            var result = produkts.GetRecords(100,true);
+            var result = produkts.GetRecords(100,false);
             foreach (var item in result)
-            {
                 Console.WriteLine(item);
-            }
+            var produkt = produkts.GetSingleRecord(2);
+            Console.WriteLine(produkt);
         }
     }
 }
