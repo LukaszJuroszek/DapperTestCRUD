@@ -7,7 +7,7 @@ namespace DapperTestCRUD
     {
         protected static SqlConnection DBConnection()
         {
-            return new SqlConnection(ConfigurationManager.ConnectionStrings["msSQLDataBase"].ConnectionString);
+                return new SqlConnection(ConfigurationManager.ConnectionStrings["msSQLDataBase"].ConnectionString);
         }
     }
 }

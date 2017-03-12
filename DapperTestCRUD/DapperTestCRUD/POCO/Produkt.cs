@@ -3,8 +3,6 @@ using System.Text;
 using System;
 using System.Collections.Generic;
 using Dapper;
-using System.Linq;
-using System.Data.Common;
 
 namespace DapperTestCRUD
 {
@@ -24,7 +22,7 @@ namespace DapperTestCRUD
             using (var db = DBConnection())
             {
                 db.Open();
-                var rowsAffected = db.Execute(@"DELETE FROM Produkt WHERE IdProdukt = @IdProdukt ",new { IdProdukt = recordId });
+                var rowsAffected = db.Execute("DELETE FROM Produkt WHERE IdProdukt = @IdProdukt ",new { IdProdukt = recordId });
                 return RowsAffected(rowsAffected);
             }
         }
@@ -53,13 +51,28 @@ namespace DapperTestCRUD
         {
             using (var db = DBConnection())
             {
-                var rowsAffected = db.Execute("INSERT Produkt values (@Nazwa, @JednostkaProduktu)",new { Nazwa = record.Nazwa,JednostkaProduktu = record.JednostkaProduktu });
+                db.Open();
+                var rowsAffected = db.Execute("INSERT INTO Produkt(Nazwa,JednostkaProduktu) values(@Nazwa,@JednostkaProduktu)",new { Nazwa = record.Nazwa,JednostkaProduktu = record.JednostkaProduktu });
                 return RowsAffected(rowsAffected);
             }
         }
-        public bool UpdateRecord(Produkt record)
+        public bool UpdateRecord(Produkt record,int recordId)
         {
-            throw new NotImplementedException();
+            using (var db = DBConnection())
+            {
+                db.Open();
+                var rowsAffected = db.Execute(@"UPDATE Produkt SET Nazwa = @Nazwa, JednostkaProduktu = @JednostkaProduktu WHERE IdProdukt = @IdProdukt ",new { IdProdukt = recordId,Nazwa = record.Nazwa,JednostkaProduktu = record.JednostkaProduktu });
+                return RowsAffected(rowsAffected);
+            }
+        }
+        public int GetLastID()
+        {
+            using (var db = DBConnection())
+            {
+                db.Open();
+                var lastProdukt = db.QueryFirst<Produkt>($"SELECT TOP 1 * FROM {nameof(Produkt)} ORDER BY IdProdukt DESC");
+                return lastProdukt.IdProdukt;
+            }
         }
         private bool RowsAffected(int rowsAffected)
         {

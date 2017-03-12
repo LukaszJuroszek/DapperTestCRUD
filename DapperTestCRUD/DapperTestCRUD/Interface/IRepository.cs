@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 namespace DapperTestCRUD.Interface
 {
     interface IRepository<T>
@@ -8,7 +7,7 @@ namespace DapperTestCRUD.Interface
         T GetSingleRecord(int recordId);
         bool InsertRecord(T record);
         bool DeleteRecord(int recordId);
-        bool UpdateRecord(T record);
-        
+        bool UpdateRecord(T record,int recordId);
+
     }
 }

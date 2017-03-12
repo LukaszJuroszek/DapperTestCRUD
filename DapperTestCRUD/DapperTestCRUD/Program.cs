@@ -17,6 +17,12 @@ namespace DapperTestCRUD
                 Nazwa = "TestProdukt",
                 JednostkaProduktu = "sztuki"
             };
+            var updatedProdukt = new Produkt
+            {
+                Nazwa = "newTestProdukt",
+                JednostkaProduktu = "sztuki"
+            };
+            Console.WriteLine(produkts.UpdateRecord(updatedProdukt,58));
             Console.WriteLine(produkts.InsertRecord(produktToInsert));
             produkt.DeleteRecord(50);
         }
